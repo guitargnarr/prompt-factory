@@ -7,11 +7,13 @@ const CATEGORIES = {
   Career: ['Job Application Optimizer', 'Technical Portfolio Piece', 'Interview Prep Guide'],
   Business: ['Marketing Campaign', 'Data Analysis Report', 'Consulting Proposal', 'Meeting Prep'],
   Engineering: ['DevOps CI/CD Pipeline', 'Code Review Checklist', 'Technical Documentation', 'Code Review Request'],
-  Security: ['Cybersecurity Incident Response'],
+  Security: ['Cybersecurity Incident Response', 'Phishing Analysis Report', 'Security Audit Scope'],
   Product: ['Product Requirements'],
-  AI: ['AI Agent Prompt', 'Customer Support Bot', 'System Prompt Builder'],
-  Creative: ['Music Production Brief'],
+  AI: ['AI Agent Prompt', 'Customer Support Bot', 'System Prompt Builder', 'Ollama Modelfile Builder', 'Multi-Agent Orchestration'],
+  Creative: ['Music Production Brief', 'Guitar Lesson Plan', 'Album Concept Document'],
   Marketing: ['LinkedIn Post Builder'],
+  Coparenting: ['Weekly Handoff Notes', 'Co-Parent Communication'],
+  Deployment: ['Vercel Deploy Checklist', 'API Endpoint Documentation'],
 }
 
 export function TemplateDrawer({ isOpen, onClose, onLoadTemplate, onImport }) {

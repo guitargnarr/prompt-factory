@@ -37,11 +37,13 @@ export const TEMPLATE_CATEGORIES = {
   Career: ['Job Application Optimizer', 'Technical Portfolio Piece', 'Interview Prep Guide'],
   Business: ['Marketing Campaign', 'Data Analysis Report', 'Consulting Proposal', 'Meeting Prep'],
   Engineering: ['DevOps CI/CD Pipeline', 'Code Review Checklist', 'Technical Documentation', 'Code Review Request'],
-  Security: ['Cybersecurity Incident Response'],
+  Security: ['Cybersecurity Incident Response', 'Phishing Analysis Report', 'Security Audit Scope'],
   Product: ['Product Requirements'],
-  AI: ['AI Agent Prompt', 'Customer Support Bot', 'System Prompt Builder'],
-  Creative: ['Music Production Brief'],
-  Marketing: ['LinkedIn Post Builder']
+  AI: ['AI Agent Prompt', 'Customer Support Bot', 'System Prompt Builder', 'Ollama Modelfile Builder', 'Multi-Agent Orchestration'],
+  Creative: ['Music Production Brief', 'Guitar Lesson Plan', 'Album Concept Document'],
+  Marketing: ['LinkedIn Post Builder'],
+  Coparenting: ['Weekly Handoff Notes', 'Co-Parent Communication'],
+  Deployment: ['Vercel Deploy Checklist', 'API Endpoint Documentation']
 }
 
 export const TEMPLATES = {
@@ -971,6 +973,596 @@ export const TEMPLATES = {
             { title: 'Line Breaks', content: 'Short paragraphs, 1-2 sentences each' },
             { title: 'Emojis', content: 'Use sparingly as bullet points or emphasis' },
             { title: 'Hashtags', content: '3-5 relevant hashtags at the end' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Ollama Modelfile Builder': {
+    icon: '🦙',
+    category: 'AI',
+    description: 'Create custom Ollama model personas',
+    create: () => createTemplateTree(
+      'Ollama Modelfile Builder',
+      'Structure for creating custom Ollama modelfiles',
+      [
+        {
+          title: 'Model Foundation',
+          content: 'Base model and parameters',
+          children: [
+            { title: 'FROM', content: 'Base model: llama3.2:3b, qwen2.5-coder:7b, mistral:7b' },
+            { title: 'PARAMETER temperature', content: '0.7 (creative) or 0.3 (precise)' },
+            { title: 'PARAMETER top_p', content: '0.9' },
+            { title: 'PARAMETER num_ctx', content: '4096 or 8192 for longer context' }
+          ]
+        },
+        {
+          title: 'SYSTEM Prompt',
+          content: 'The core identity and instructions',
+          children: [
+            { title: 'Identity', content: 'You are [specific expert]. You specialize in [domain].' },
+            { title: 'Expertise Areas', content: 'List 3-5 specific knowledge domains' },
+            { title: 'Communication Style', content: 'Tone, format preferences, verbosity level' },
+            { title: 'Key Behaviors', content: 'Always do X, never do Y, prefer Z approach' }
+          ]
+        },
+        {
+          title: 'Domain Knowledge',
+          content: 'Bake in specific facts',
+          children: [
+            { title: 'Core Facts', content: 'Essential information the model should "know"' },
+            { title: 'Terminology', content: 'Domain-specific vocabulary to use correctly' },
+            { title: 'Common Patterns', content: 'Typical problems and solutions in this domain' }
+          ]
+        },
+        {
+          title: 'Output Format',
+          content: 'How responses should be structured',
+          children: [
+            { title: 'Default Format', content: 'Bullets, paragraphs, code blocks, JSON' },
+            { title: 'Length Guidance', content: 'Concise vs. detailed, when to elaborate' }
+          ]
+        },
+        {
+          title: 'Example Usage',
+          content: 'Test prompts for validation',
+          children: [
+            { title: 'Test Prompt 1', content: 'Simple query to verify basic functionality' },
+            { title: 'Test Prompt 2', content: 'Complex query to test expertise depth' },
+            { title: 'Edge Case', content: 'Query that should trigger specific behavior' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Multi-Agent Orchestration': {
+    icon: '🎭',
+    category: 'AI',
+    description: 'Design multi-model pipelines like Mirador',
+    create: () => createTemplateTree(
+      'Multi-Agent Orchestration',
+      'Architecture for coordinating multiple AI models',
+      [
+        {
+          title: 'Pipeline Overview',
+          content: 'What this orchestration accomplishes',
+          children: [
+            { title: 'Goal', content: 'End-to-end outcome this pipeline produces' },
+            { title: 'Input', content: 'What triggers the pipeline, expected format' },
+            { title: 'Output', content: 'Final deliverable format and destination' }
+          ]
+        },
+        {
+          title: 'Agent Roster',
+          content: 'Models in the pipeline',
+          children: [
+            { title: 'Agent 1: Router', content: 'Model, role: classify input and route to specialists' },
+            { title: 'Agent 2: Specialist A', content: 'Model, role: handle [specific task type]' },
+            { title: 'Agent 3: Specialist B', content: 'Model, role: handle [other task type]' },
+            { title: 'Agent 4: Synthesizer', content: 'Model, role: combine outputs, ensure coherence' },
+            { title: 'Agent 5: Validator', content: 'Model, role: check quality, request revisions' }
+          ]
+        },
+        {
+          title: 'Flow Logic',
+          content: 'How data moves between agents',
+          children: [
+            { title: 'Routing Rules', content: 'If [condition] → Agent X, else → Agent Y' },
+            { title: 'Handoff Format', content: 'JSON schema for inter-agent communication' },
+            { title: 'Feedback Loops', content: 'When/how to send back for revision' },
+            { title: 'Termination Conditions', content: 'When pipeline is "done"' }
+          ]
+        },
+        {
+          title: 'Error Handling',
+          content: 'What happens when things go wrong',
+          children: [
+            { title: 'Timeout Handling', content: 'Max wait time, fallback behavior' },
+            { title: 'Quality Failures', content: 'If validator rejects, then...' },
+            { title: 'Model Unavailable', content: 'Fallback models or graceful degradation' }
+          ]
+        },
+        {
+          title: 'Observability',
+          content: 'Monitoring and debugging',
+          children: [
+            { title: 'Logging Points', content: 'What to log at each stage' },
+            { title: 'Metrics', content: 'Latency, success rate, token usage per agent' },
+            { title: 'Debug Mode', content: 'How to trace a request through the pipeline' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Phishing Analysis Report': {
+    icon: '🎣',
+    category: 'Security',
+    description: 'Document phishing campaigns for PhishGuard',
+    create: () => createTemplateTree(
+      'Phishing Analysis Report',
+      'Structured analysis of phishing attempts',
+      [
+        {
+          title: 'Sample Overview',
+          content: 'Basic information about the phishing attempt',
+          children: [
+            { title: 'Date Received', content: 'When the sample was captured' },
+            { title: 'Delivery Method', content: 'Email, SMS, social media, etc.' },
+            { title: 'Impersonated Brand', content: 'Who they\'re pretending to be' },
+            { title: 'Target Audience', content: 'Who this campaign targets' }
+          ]
+        },
+        {
+          title: 'Technical Indicators',
+          content: 'IOCs for detection',
+          children: [
+            { title: 'Sender Info', content: 'Email address, display name, headers' },
+            { title: 'URLs', content: 'All links in the message, where they actually go' },
+            { title: 'Domains', content: 'Registered domains, WHOIS info, hosting' },
+            { title: 'Attachments', content: 'File names, hashes, types' }
+          ]
+        },
+        {
+          title: 'Deception Techniques',
+          content: 'How they trick victims',
+          children: [
+            { title: 'Urgency Tactics', content: 'Time pressure, threats, fear' },
+            { title: 'Authority Claims', content: 'Logos, titles, official language' },
+            { title: 'Credential Harvesting', content: 'What info they\'re trying to steal' },
+            { title: 'Evasion Methods', content: 'How they bypass filters' }
+          ]
+        },
+        {
+          title: 'Risk Assessment',
+          content: 'Severity and impact',
+          children: [
+            { title: 'Sophistication Level', content: 'Low/Medium/High - why?' },
+            { title: 'Potential Impact', content: 'What happens if someone falls for it' },
+            { title: 'Detection Difficulty', content: 'How hard to spot for average user' }
+          ]
+        },
+        {
+          title: 'Recommendations',
+          content: 'What to do about it',
+          children: [
+            { title: 'Immediate Actions', content: 'Block, report, alert users' },
+            { title: 'Detection Rules', content: 'Signatures, filters, YARA rules' },
+            { title: 'User Education', content: 'What to tell employees about this type' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Security Audit Scope': {
+    icon: '🔐',
+    category: 'Security',
+    description: 'Define security review boundaries',
+    create: () => createTemplateTree(
+      'Security Audit Scope',
+      'Scope document for security assessments',
+      [
+        {
+          title: 'Audit Overview',
+          content: 'What we\'re reviewing',
+          children: [
+            { title: 'Target System', content: 'Application, repo, infrastructure being audited' },
+            { title: 'Audit Type', content: 'Code review, pentest, config review, full audit' },
+            { title: 'Timeline', content: 'Start date, end date, report due' }
+          ]
+        },
+        {
+          title: 'In Scope',
+          content: 'What will be tested',
+          children: [
+            { title: 'Components', content: 'Specific services, repos, endpoints' },
+            { title: 'Attack Surfaces', content: 'Web app, API, auth, file upload, etc.' },
+            { title: 'Test Types', content: 'OWASP Top 10, auth bypass, injection, etc.' }
+          ]
+        },
+        {
+          title: 'Out of Scope',
+          content: 'What will NOT be tested',
+          children: [
+            { title: 'Excluded Systems', content: 'Third-party services, prod data, etc.' },
+            { title: 'Excluded Tests', content: 'DoS, social engineering, physical' },
+            { title: 'Reason for Exclusions', content: 'Why these are out of scope' }
+          ]
+        },
+        {
+          title: 'Credentials & Access',
+          content: 'What access is provided',
+          children: [
+            { title: 'Test Accounts', content: 'Credentials for different user roles' },
+            { title: 'Environment', content: 'Staging URL, VPN access, etc.' },
+            { title: 'Source Code', content: 'Repo access, branch to review' }
+          ]
+        },
+        {
+          title: 'Deliverables',
+          content: 'What the audit produces',
+          children: [
+            { title: 'Report Format', content: 'PDF, markdown, JIRA tickets' },
+            { title: 'Severity Ratings', content: 'Critical/High/Medium/Low/Info' },
+            { title: 'Remediation Guidance', content: 'Fix recommendations per finding' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Guitar Lesson Plan': {
+    icon: '🎸',
+    category: 'Creative',
+    description: 'Structure guitar lessons and practice sessions',
+    create: () => createTemplateTree(
+      'Guitar Lesson Plan',
+      'Structured approach to teaching or learning guitar',
+      [
+        {
+          title: 'Lesson Overview',
+          content: 'What this lesson covers',
+          children: [
+            { title: 'Topic', content: 'Scale, technique, song, or concept' },
+            { title: 'Skill Level', content: 'Beginner, intermediate, advanced' },
+            { title: 'Duration', content: 'Expected time to complete' },
+            { title: 'Prerequisites', content: 'What student should already know' }
+          ]
+        },
+        {
+          title: 'Theory Component',
+          content: 'The "why" behind the technique',
+          children: [
+            { title: 'Musical Concept', content: 'Scale theory, chord construction, etc.' },
+            { title: 'Fretboard Visualization', content: 'Patterns, shapes, positions' },
+            { title: 'Ear Training', content: 'How to hear and recognize this' }
+          ]
+        },
+        {
+          title: 'Technical Exercises',
+          content: 'The "how" - physical technique',
+          children: [
+            { title: 'Warm-up', content: 'Finger exercises, stretches' },
+            { title: 'Exercise 1', content: 'Slow, isolated technique work' },
+            { title: 'Exercise 2', content: 'Building speed/fluency' },
+            { title: 'Common Mistakes', content: 'What to watch for and correct' }
+          ]
+        },
+        {
+          title: 'Application',
+          content: 'Using it in real music',
+          children: [
+            { title: 'Lick/Riff', content: 'Musical phrase using the concept' },
+            { title: 'Song Example', content: 'Real song that uses this' },
+            { title: 'Improvisation Prompt', content: 'Backing track + constraints' }
+          ]
+        },
+        {
+          title: 'Practice Plan',
+          content: 'How to practice this week',
+          children: [
+            { title: 'Daily Routine', content: '15-30 min breakdown' },
+            { title: 'Tempo Goals', content: 'BPM targets for exercises' },
+            { title: 'Mastery Checklist', content: 'How to know when you\'ve got it' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Album Concept Document': {
+    icon: '💿',
+    category: 'Creative',
+    description: 'Plan a cohesive album or EP',
+    create: () => createTemplateTree(
+      'Album Concept Document',
+      'Creative direction for a music release',
+      [
+        {
+          title: 'Album Identity',
+          content: 'The big picture vision',
+          children: [
+            { title: 'Working Title', content: 'Album name' },
+            { title: 'Core Concept', content: 'Thematic thread connecting all songs' },
+            { title: 'Emotional Arc', content: 'Journey from track 1 to final track' },
+            { title: 'Reference Albums', content: 'Albums that inspire the direction' }
+          ]
+        },
+        {
+          title: 'Sonic Palette',
+          content: 'The sound of the album',
+          children: [
+            { title: 'Guitar Tones', content: 'Clean, crunch, lead sounds to use' },
+            { title: 'Production Style', content: 'Raw, polished, ambient, aggressive' },
+            { title: 'Key Instruments', content: 'What\'s featured beyond guitar' },
+            { title: 'Reference Tones', content: 'Specific songs/albums for sound' }
+          ]
+        },
+        {
+          title: 'Track List',
+          content: 'Song-by-song overview',
+          children: [
+            { title: 'Track 1: Opener', content: 'Title, key, tempo, role in album' },
+            { title: 'Track 2', content: 'Title, key, tempo, role in album' },
+            { title: 'Track 3', content: 'Title, key, tempo, role in album' },
+            { title: 'Track 4', content: 'Title, key, tempo, role in album' },
+            { title: 'Track 5: Closer', content: 'Title, key, tempo, role in album' }
+          ]
+        },
+        {
+          title: 'Visual Identity',
+          content: 'Album artwork and branding',
+          children: [
+            { title: 'Cover Concept', content: 'Visual direction for album art' },
+            { title: 'Color Palette', content: 'Colors that represent the album' },
+            { title: 'Typography', content: 'Font style for title/text' }
+          ]
+        },
+        {
+          title: 'Release Strategy',
+          content: 'How to put it out',
+          children: [
+            { title: 'Format', content: 'Digital, vinyl, CD, Bandcamp' },
+            { title: 'Singles', content: 'Which tracks to release first' },
+            { title: 'Timeline', content: 'Recording, mixing, mastering, release dates' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Weekly Handoff Notes': {
+    icon: '📋',
+    category: 'Coparenting',
+    description: 'Transition notes between co-parents',
+    create: () => createTemplateTree(
+      'Weekly Handoff Notes',
+      'Smooth transitions between households',
+      [
+        {
+          title: 'This Week Summary',
+          content: 'What happened during your time',
+          children: [
+            { title: 'Highlights', content: 'Good moments, achievements, fun activities' },
+            { title: 'Challenges', content: 'Any difficulties or issues that came up' },
+            { title: 'Mood/Behavior', content: 'General emotional state during the week' }
+          ]
+        },
+        {
+          title: 'Health & Wellness',
+          content: 'Physical health updates',
+          children: [
+            { title: 'Sleep', content: 'Bedtime, wake time, any issues' },
+            { title: 'Eating', content: 'Appetite, new foods tried, any concerns' },
+            { title: 'Medications', content: 'What was given, when, any reactions' },
+            { title: 'Health Notes', content: 'Illness, injuries, doctor visits' }
+          ]
+        },
+        {
+          title: 'School/Activities',
+          content: 'Educational and extracurricular updates',
+          children: [
+            { title: 'Homework', content: 'Completed, in progress, due dates' },
+            { title: 'School Events', content: 'Upcoming events, forms needed' },
+            { title: 'Activities', content: 'Practice schedules, equipment needed' }
+          ]
+        },
+        {
+          title: 'Upcoming',
+          content: 'What\'s coming next week',
+          children: [
+            { title: 'Appointments', content: 'Doctor, dentist, therapy, etc.' },
+            { title: 'Events', content: 'Parties, playdates, school events' },
+            { title: 'Reminders', content: 'Things to remember or prepare for' }
+          ]
+        },
+        {
+          title: 'Items Sent',
+          content: 'What\'s in the bag',
+          children: [
+            { title: 'Clothes', content: 'What\'s packed, what needs washing' },
+            { title: 'School Items', content: 'Backpack contents, projects' },
+            { title: 'Comfort Items', content: 'Stuffed animals, blankets, etc.' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Co-Parent Communication': {
+    icon: '🤝',
+    category: 'Coparenting',
+    description: 'Structure difficult co-parent conversations',
+    create: () => createTemplateTree(
+      'Co-Parent Communication',
+      'Framework for productive co-parent discussions',
+      [
+        {
+          title: 'Topic',
+          content: 'What needs to be discussed',
+          children: [
+            { title: 'Issue Summary', content: 'Clear, factual description of the topic' },
+            { title: 'Why Now', content: 'Why this needs to be addressed' },
+            { title: 'Desired Outcome', content: 'What resolution would look like' }
+          ]
+        },
+        {
+          title: 'My Perspective',
+          content: 'Your view using I-statements',
+          children: [
+            { title: 'Observations', content: 'What I\'ve noticed (facts, not judgments)' },
+            { title: 'Feelings', content: 'How this affects me/child (I feel...)' },
+            { title: 'Needs', content: 'What I/child need in this situation' }
+          ]
+        },
+        {
+          title: 'Proposed Solutions',
+          content: 'Options to consider',
+          children: [
+            { title: 'Option A', content: 'First possibility and its trade-offs' },
+            { title: 'Option B', content: 'Alternative approach' },
+            { title: 'Compromise', content: 'Middle ground if needed' }
+          ]
+        },
+        {
+          title: 'Child Focus',
+          content: 'Keep the focus on what matters',
+          children: [
+            { title: 'Child\'s Best Interest', content: 'How each option affects the child' },
+            { title: 'Child\'s Voice', content: 'What has the child expressed about this' },
+            { title: 'Consistency', content: 'How to maintain stability between homes' }
+          ]
+        },
+        {
+          title: 'Next Steps',
+          content: 'Moving forward',
+          children: [
+            { title: 'Decision', content: 'What we agreed to' },
+            { title: 'Timeline', content: 'When this starts/happens' },
+            { title: 'Follow-up', content: 'When to check in on how it\'s going' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Vercel Deploy Checklist': {
+    icon: '▲',
+    category: 'Deployment',
+    description: 'Pre-flight checks for Vercel deployments',
+    create: () => createTemplateTree(
+      'Vercel Deploy Checklist',
+      'Ensure successful Vercel deployments',
+      [
+        {
+          title: 'Pre-Deploy Checks',
+          content: 'Before running vercel --prod',
+          children: [
+            { title: 'Build Locally', content: 'npm run build succeeds without errors' },
+            { title: 'Preview Locally', content: 'npm run preview looks correct' },
+            { title: 'Environment Variables', content: 'All VITE_ vars set for build, not just dashboard' },
+            { title: 'Git Status', content: 'All changes committed, nothing unexpected' }
+          ]
+        },
+        {
+          title: 'Configuration',
+          content: 'Verify project setup',
+          children: [
+            { title: 'vercel.json', content: 'SPA rewrites in place for React Router' },
+            { title: 'Framework Preset', content: 'Vite detected automatically' },
+            { title: 'Build Command', content: 'Uses correct command (npm run build)' },
+            { title: 'Output Directory', content: 'Points to dist/ for Vite' }
+          ]
+        },
+        {
+          title: 'Assets',
+          content: 'Static files and images',
+          children: [
+            { title: 'OG Image', content: 'public/og-image.png exists, 1200x630' },
+            { title: 'Favicon', content: 'public/favicon.ico exists' },
+            { title: 'Meta Tags', content: 'Absolute URLs in index.html for social' },
+            { title: 'public/ Added', content: 'git add public/ - assets committed' }
+          ]
+        },
+        {
+          title: 'Post-Deploy Verification',
+          content: 'After deployment completes',
+          children: [
+            { title: 'HTTP 200', content: 'curl -s -o /dev/null -w "%{http_code}" URL' },
+            { title: 'Playwright Screenshot', content: 'Visual verification of SPA rendering' },
+            { title: 'Auth Settings', content: 'Deployment Protection disabled if public' },
+            { title: 'Domain Config', content: 'Custom domain pointing correctly' }
+          ]
+        },
+        {
+          title: 'Rollback Plan',
+          content: 'If something goes wrong',
+          children: [
+            { title: 'Previous Deploy', content: 'vercel rollback or redeploy from dashboard' },
+            { title: 'Git Revert', content: 'Commit to revert if code issue' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'API Endpoint Documentation': {
+    icon: '🔌',
+    category: 'Deployment',
+    description: 'Document Render/Railway API endpoints',
+    create: () => createTemplateTree(
+      'API Endpoint Documentation',
+      'Structured docs for backend APIs',
+      [
+        {
+          title: 'API Overview',
+          content: 'What this API does',
+          children: [
+            { title: 'Base URL', content: 'https://your-api.onrender.com' },
+            { title: 'Purpose', content: 'What problem this API solves' },
+            { title: 'Authentication', content: 'API key, OAuth, none' },
+            { title: 'Rate Limits', content: 'Requests per minute/hour' }
+          ]
+        },
+        {
+          title: 'Endpoints',
+          content: 'Available routes',
+          children: [
+            { title: 'GET /health', content: 'Health check - returns {"status": "ok"}' },
+            { title: 'GET /endpoint1', content: 'Description, params, response shape' },
+            { title: 'POST /endpoint2', content: 'Description, request body, response' },
+            { title: 'PUT /endpoint3', content: 'Description, params, response' }
+          ]
+        },
+        {
+          title: 'Request/Response Examples',
+          content: 'Copy-paste examples',
+          children: [
+            { title: 'Curl Example', content: 'curl -X GET "https://api/endpoint"' },
+            { title: 'Success Response', content: 'JSON shape for 200 response' },
+            { title: 'Error Response', content: 'JSON shape for 4xx/5xx errors' }
+          ]
+        },
+        {
+          title: 'Deployment Notes',
+          content: 'Platform-specific details',
+          children: [
+            { title: 'Platform', content: 'Render, Railway, or other' },
+            { title: 'Start Command', content: 'uvicorn main:app --host 0.0.0.0 --port $PORT' },
+            { title: 'Cold Start', content: 'Free tier spins down after 15min, ~30s restart' },
+            { title: 'Environment Variables', content: 'Required env vars and their purpose' }
+          ]
+        },
+        {
+          title: 'Integration Guide',
+          content: 'How to use from frontend',
+          children: [
+            { title: 'CORS', content: 'Allowed origins, headers' },
+            { title: 'Frontend Example', content: 'fetch() code for calling the API' },
+            { title: 'Error Handling', content: 'How frontend should handle failures' }
           ]
         }
       ]
