@@ -34,11 +34,14 @@ function createNodeRecursive(node) {
 
 export const TEMPLATE_CATEGORIES = {
   General: ['Blank'],
+  Career: ['Job Application Optimizer', 'Technical Portfolio Piece', 'Interview Prep Guide'],
+  Business: ['Marketing Campaign', 'Data Analysis Report', 'Consulting Proposal', 'Meeting Prep'],
+  Engineering: ['DevOps CI/CD Pipeline', 'Code Review Checklist', 'Technical Documentation', 'Code Review Request'],
   Security: ['Cybersecurity Incident Response'],
-  Business: ['Marketing Campaign', 'Data Analysis Report'],
-  Engineering: ['DevOps CI/CD Pipeline', 'Code Review Checklist', 'Technical Documentation'],
   Product: ['Product Requirements'],
-  AI: ['AI Agent Prompt', 'Customer Support Bot']
+  AI: ['AI Agent Prompt', 'Customer Support Bot', 'System Prompt Builder'],
+  Creative: ['Music Production Brief'],
+  Marketing: ['LinkedIn Post Builder']
 }
 
 export const TEMPLATES = {
@@ -488,6 +491,486 @@ export const TEMPLATES = {
             { title: 'Summary', content: 'What the data tells us overall' },
             { title: 'Action Items', content: 'Specific recommendations with owners and timelines' },
             { title: 'Future Analysis', content: 'Questions raised that warrant further investigation' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Job Application Optimizer': {
+    icon: '🎯',
+    category: 'Career',
+    description: 'Cover letter + resume tailoring for specific roles',
+    create: () => createTemplateTree(
+      'Job Application Optimizer',
+      'Tailor your application materials for a specific role',
+      [
+        {
+          title: 'Target Role Analysis',
+          content: 'Understand what the employer is looking for',
+          children: [
+            { title: 'Job Title & Company', content: '[Role] at [Company]' },
+            { title: 'Key Requirements', content: 'Must-have skills and experience from job posting' },
+            { title: 'Nice-to-Haves', content: 'Preferred qualifications that differentiate candidates' },
+            { title: 'Company Context', content: 'Industry, size, culture, recent news, tech stack' }
+          ]
+        },
+        {
+          title: 'My Relevant Experience',
+          content: 'Map your background to their needs',
+          children: [
+            { title: 'Direct Matches', content: 'Skills/experience that exactly match requirements' },
+            { title: 'Transferable Skills', content: 'Related experience that demonstrates capability' },
+            { title: 'Quantified Achievements', content: 'Metrics and outcomes (%, $, time saved)' },
+            { title: 'Gap Mitigation', content: 'How to address missing requirements' }
+          ]
+        },
+        {
+          title: 'Cover Letter Framework',
+          content: 'Structure for compelling narrative',
+          children: [
+            { title: 'Hook', content: 'Opening that grabs attention - why this role, why now' },
+            { title: 'Value Proposition', content: '2-3 key reasons you\'re the right fit' },
+            { title: 'Proof Points', content: 'Specific examples demonstrating each claim' },
+            { title: 'Close', content: 'Call to action and enthusiasm for next steps' }
+          ]
+        },
+        {
+          title: 'Resume Customization',
+          content: 'Adjustments for this specific application',
+          children: [
+            { title: 'Summary Rewrite', content: 'Tailored professional summary for this role' },
+            { title: 'Keyword Optimization', content: 'Terms from job posting to incorporate' },
+            { title: 'Experience Prioritization', content: 'Which roles/projects to emphasize' },
+            { title: 'Skills Reorder', content: 'Most relevant skills first' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Technical Portfolio Piece': {
+    icon: '🏆',
+    category: 'Career',
+    description: 'Present a project to employers or clients',
+    create: () => createTemplateTree(
+      'Technical Portfolio Piece',
+      'Structure for presenting a technical project',
+      [
+        {
+          title: 'Project Overview',
+          content: 'The elevator pitch',
+          children: [
+            { title: 'One-Liner', content: 'What it does in one sentence' },
+            { title: 'Problem Solved', content: 'The pain point this addresses' },
+            { title: 'Live Demo', content: 'URL or video link' },
+            { title: 'Source Code', content: 'GitHub repo link' }
+          ]
+        },
+        {
+          title: 'Technical Decisions',
+          content: 'Show your engineering thinking',
+          children: [
+            { title: 'Tech Stack', content: 'Languages, frameworks, services used and WHY' },
+            { title: 'Architecture', content: 'High-level system design' },
+            { title: 'Interesting Challenges', content: 'Problems you solved and how' },
+            { title: 'Trade-offs Made', content: 'Decisions and their reasoning' }
+          ]
+        },
+        {
+          title: 'Results & Impact',
+          content: 'Quantify the outcome',
+          children: [
+            { title: 'Metrics', content: 'Performance, usage, or business metrics' },
+            { title: 'User Feedback', content: 'Quotes or testimonials if available' },
+            { title: 'What I Learned', content: 'Skills gained, mistakes made' }
+          ]
+        },
+        {
+          title: 'Future Roadmap',
+          content: 'Where this could go',
+          children: [
+            { title: 'Planned Features', content: 'What\'s next on the backlog' },
+            { title: 'Scaling Considerations', content: 'How it would handle growth' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Interview Prep Guide': {
+    icon: '🎤',
+    category: 'Career',
+    description: 'Prepare for interviews at specific companies',
+    create: () => createTemplateTree(
+      'Interview Prep Guide',
+      'Comprehensive preparation for a specific interview',
+      [
+        {
+          title: 'Company Research',
+          content: 'Know who you\'re talking to',
+          children: [
+            { title: 'Mission & Values', content: 'What the company stands for' },
+            { title: 'Recent News', content: 'Funding, launches, acquisitions, challenges' },
+            { title: 'Tech Stack', content: 'Technologies they use' },
+            { title: 'Interview Process', content: 'What to expect (Glassdoor, Blind)' }
+          ]
+        },
+        {
+          title: 'Role Alignment',
+          content: 'Connect your experience to their needs',
+          children: [
+            { title: 'Why This Role', content: 'Your genuine interest and fit' },
+            { title: 'Why This Company', content: 'Specific reasons beyond generic praise' },
+            { title: 'Value I Bring', content: 'Unique contribution you can make' }
+          ]
+        },
+        {
+          title: 'STAR Stories',
+          content: 'Prepared behavioral examples',
+          children: [
+            { title: 'Leadership', content: 'Situation, Task, Action, Result' },
+            { title: 'Conflict Resolution', content: 'Situation, Task, Action, Result' },
+            { title: 'Technical Challenge', content: 'Situation, Task, Action, Result' },
+            { title: 'Failure & Learning', content: 'Situation, Task, Action, Result' }
+          ]
+        },
+        {
+          title: 'Questions to Ask',
+          content: 'Show engagement and evaluate fit',
+          children: [
+            { title: 'Role Questions', content: 'Day-to-day, success metrics, challenges' },
+            { title: 'Team Questions', content: 'Structure, collaboration, culture' },
+            { title: 'Growth Questions', content: 'Learning opportunities, career path' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Consulting Proposal': {
+    icon: '📝',
+    category: 'Business',
+    description: 'Scope, deliverables, and pricing for client work',
+    create: () => createTemplateTree(
+      'Consulting Proposal',
+      'Structure for client engagement proposals',
+      [
+        {
+          title: 'Executive Summary',
+          content: 'One-page overview for decision makers',
+          children: [
+            { title: 'Client Challenge', content: 'The problem in their words' },
+            { title: 'Proposed Solution', content: 'How we\'ll solve it' },
+            { title: 'Investment', content: 'Total cost and timeline' },
+            { title: 'Expected Outcome', content: 'What success looks like' }
+          ]
+        },
+        {
+          title: 'Scope of Work',
+          content: 'Detailed deliverables',
+          children: [
+            { title: 'In Scope', content: 'Exactly what\'s included' },
+            { title: 'Out of Scope', content: 'What\'s explicitly NOT included' },
+            { title: 'Deliverables', content: 'Tangible outputs with descriptions' },
+            { title: 'Milestones', content: 'Key checkpoints and dates' }
+          ]
+        },
+        {
+          title: 'Approach & Timeline',
+          content: 'How the work will be done',
+          children: [
+            { title: 'Phase 1: Discovery', content: 'Research, interviews, analysis' },
+            { title: 'Phase 2: Development', content: 'Building the solution' },
+            { title: 'Phase 3: Delivery', content: 'Handoff, training, documentation' }
+          ]
+        },
+        {
+          title: 'Investment',
+          content: 'Pricing structure',
+          children: [
+            { title: 'Pricing Model', content: 'Fixed, hourly, retainer, or hybrid' },
+            { title: 'Cost Breakdown', content: 'Line items by phase or deliverable' },
+            { title: 'Payment Terms', content: 'Schedule, invoicing, accepted methods' }
+          ]
+        },
+        {
+          title: 'Terms & Conditions',
+          content: 'Protect both parties',
+          children: [
+            { title: 'Assumptions', content: 'Dependencies on client' },
+            { title: 'Change Process', content: 'How scope changes are handled' },
+            { title: 'IP Ownership', content: 'Who owns the deliverables' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Meeting Prep': {
+    icon: '📅',
+    category: 'Business',
+    description: 'Agenda, notes, and action items structure',
+    create: () => createTemplateTree(
+      'Meeting Prep',
+      'Run effective meetings with clear outcomes',
+      [
+        {
+          title: 'Meeting Info',
+          content: 'Basic details',
+          children: [
+            { title: 'Purpose', content: 'Why are we meeting? Decision, brainstorm, update?' },
+            { title: 'Attendees', content: 'Who needs to be there and why' },
+            { title: 'Duration', content: 'Timebox for the meeting' }
+          ]
+        },
+        {
+          title: 'Agenda',
+          content: 'What we\'ll cover',
+          children: [
+            { title: 'Topic 1', content: '[5 min] Description - Owner' },
+            { title: 'Topic 2', content: '[10 min] Description - Owner' },
+            { title: 'Topic 3', content: '[10 min] Description - Owner' },
+            { title: 'Open Discussion', content: '[5 min] Questions and parking lot items' }
+          ]
+        },
+        {
+          title: 'Pre-Read Materials',
+          content: 'What attendees should review beforehand',
+          children: [
+            { title: 'Documents', content: 'Links to relevant docs' },
+            { title: 'Context', content: 'Background needed for discussion' }
+          ]
+        },
+        {
+          title: 'Meeting Notes',
+          content: 'Capture during the meeting',
+          children: [
+            { title: 'Key Decisions', content: 'What was decided' },
+            { title: 'Discussion Points', content: 'Important context shared' },
+            { title: 'Parking Lot', content: 'Items for later' }
+          ]
+        },
+        {
+          title: 'Action Items',
+          content: 'What happens next',
+          children: [
+            { title: 'Action 1', content: '[Owner] Task - Due date' },
+            { title: 'Action 2', content: '[Owner] Task - Due date' },
+            { title: 'Follow-up Meeting', content: 'Next meeting if needed' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Code Review Request': {
+    icon: '🔬',
+    category: 'Engineering',
+    description: 'Context for getting AI help debugging',
+    create: () => createTemplateTree(
+      'Code Review Request',
+      'Get better help by providing complete context',
+      [
+        {
+          title: 'Problem Statement',
+          content: 'What\'s happening',
+          children: [
+            { title: 'Expected Behavior', content: 'What should happen' },
+            { title: 'Actual Behavior', content: 'What\'s actually happening' },
+            { title: 'Error Messages', content: 'Exact error text, stack traces' }
+          ]
+        },
+        {
+          title: 'Context',
+          content: 'Environment and setup',
+          children: [
+            { title: 'Tech Stack', content: 'Language, framework, versions' },
+            { title: 'Relevant Files', content: 'Which files are involved' },
+            { title: 'Recent Changes', content: 'What changed before this broke' }
+          ]
+        },
+        {
+          title: 'Code',
+          content: 'The relevant code',
+          children: [
+            { title: 'Problematic Code', content: 'The code that\'s not working' },
+            { title: 'Related Code', content: 'Other relevant functions/components' },
+            { title: 'Config Files', content: 'Relevant configuration' }
+          ]
+        },
+        {
+          title: 'What I\'ve Tried',
+          content: 'Debugging attempts so far',
+          children: [
+            { title: 'Attempted Solutions', content: 'What you\'ve already tried' },
+            { title: 'Research Done', content: 'Stack Overflow, docs consulted' },
+            { title: 'Hypotheses', content: 'What you think might be wrong' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'System Prompt Builder': {
+    icon: '🧠',
+    category: 'AI',
+    description: 'Meta-template for building AI personas',
+    create: () => createTemplateTree(
+      'System Prompt Builder',
+      'Framework for creating effective AI system prompts',
+      [
+        {
+          title: 'Identity',
+          content: 'Who is this AI?',
+          children: [
+            { title: 'Role', content: 'You are a [specific expert/assistant type]' },
+            { title: 'Expertise', content: 'Deep knowledge in [domains]' },
+            { title: 'Personality', content: 'Communication style, tone, demeanor' }
+          ]
+        },
+        {
+          title: 'Core Instructions',
+          content: 'How should it behave?',
+          children: [
+            { title: 'Primary Directive', content: 'The main goal of every interaction' },
+            { title: 'Response Format', content: 'How to structure outputs' },
+            { title: 'Thinking Process', content: 'How to approach problems' }
+          ]
+        },
+        {
+          title: 'Domain Knowledge',
+          content: 'What does it know?',
+          children: [
+            { title: 'Key Facts', content: 'Essential information to have' },
+            { title: 'Terminology', content: 'Domain-specific vocabulary' },
+            { title: 'Best Practices', content: 'Standards and conventions' }
+          ]
+        },
+        {
+          title: 'Constraints',
+          content: 'What should it NOT do?',
+          children: [
+            { title: 'Boundaries', content: 'Topics to avoid or redirect' },
+            { title: 'Limitations', content: 'What it should admit it can\'t do' },
+            { title: 'Safety Rails', content: 'Guardrails for sensitive topics' }
+          ]
+        },
+        {
+          title: 'Examples',
+          content: 'Show desired behavior',
+          children: [
+            { title: 'Good Response Example', content: 'User: "..." Assistant: "..."' },
+            { title: 'Edge Case Handling', content: 'How to handle tricky situations' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Music Production Brief': {
+    icon: '🎸',
+    category: 'Creative',
+    description: 'Song structure, harmonic architecture, production notes',
+    create: () => createTemplateTree(
+      'Music Production Brief',
+      'Document song ideas and production direction',
+      [
+        {
+          title: 'Song Overview',
+          content: 'The big picture',
+          children: [
+            { title: 'Working Title', content: 'Song name' },
+            { title: 'Concept/Theme', content: 'What is this song about emotionally/lyrically' },
+            { title: 'Reference Tracks', content: 'Songs that inspire the vibe' },
+            { title: 'Target Duration', content: 'Approximate length' }
+          ]
+        },
+        {
+          title: 'Musical Foundation',
+          content: 'Harmonic and rhythmic framework',
+          children: [
+            { title: 'Key & Scale', content: 'E minor, A Phrygian, etc.' },
+            { title: 'Tempo & Time Signature', content: 'BPM, 4/4, 6/8, etc.' },
+            { title: 'Chord Progression', content: 'Main progressions for each section' },
+            { title: 'Tuning', content: 'Standard, Drop D, etc.' }
+          ]
+        },
+        {
+          title: 'Song Structure',
+          content: 'Arrangement map',
+          children: [
+            { title: 'Intro', content: 'Duration, feel, instrumentation' },
+            { title: 'Verse', content: 'Duration, feel, instrumentation' },
+            { title: 'Chorus', content: 'Duration, feel, instrumentation' },
+            { title: 'Bridge/Breakdown', content: 'Duration, feel, instrumentation' },
+            { title: 'Outro', content: 'Duration, feel, instrumentation' }
+          ]
+        },
+        {
+          title: 'Production Notes',
+          content: 'Sound design direction',
+          children: [
+            { title: 'Guitar Tones', content: 'Clean, crunch, high gain, effects' },
+            { title: 'Drum Sound', content: 'Acoustic, electronic, hybrid, samples' },
+            { title: 'Bass Approach', content: 'Pick, fingers, synth, tone' },
+            { title: 'Additional Elements', content: 'Synths, samples, orchestration' }
+          ]
+        },
+        {
+          title: 'Technical Notes',
+          content: 'Recording considerations',
+          children: [
+            { title: 'Guitar Parts', content: 'Riffs, leads, layers needed' },
+            { title: 'Difficult Sections', content: 'Parts that need practice' },
+            { title: 'Mix Notes', content: 'Balance, panning, effects ideas' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'LinkedIn Post Builder': {
+    icon: '💼',
+    category: 'Marketing',
+    description: 'Thought leadership post structure',
+    create: () => createTemplateTree(
+      'LinkedIn Post Builder',
+      'Create engaging professional content',
+      [
+        {
+          title: 'Hook',
+          content: 'First 2 lines - must stop the scroll',
+          children: [
+            { title: 'Opening Line', content: 'Contrarian take, surprising stat, or bold claim' },
+            { title: 'Promise', content: 'What the reader will get from this post' }
+          ]
+        },
+        {
+          title: 'Body',
+          content: 'The meat of the post',
+          children: [
+            { title: 'Context/Story', content: 'Set up the situation or share experience' },
+            { title: 'Key Insight', content: 'The main lesson or takeaway' },
+            { title: 'Supporting Points', content: '3-5 bullets that reinforce the insight' },
+            { title: 'Proof', content: 'Data, example, or credibility builder' }
+          ]
+        },
+        {
+          title: 'Call to Action',
+          content: 'Drive engagement',
+          children: [
+            { title: 'Question', content: 'Ask something that prompts comments' },
+            { title: 'Next Step', content: 'What should reader do? (follow, DM, link)' }
+          ]
+        },
+        {
+          title: 'Formatting Notes',
+          content: 'Make it scannable',
+          children: [
+            { title: 'Line Breaks', content: 'Short paragraphs, 1-2 sentences each' },
+            { title: 'Emojis', content: 'Use sparingly as bullet points or emphasis' },
+            { title: 'Hashtags', content: '3-5 relevant hashtags at the end' }
           ]
         }
       ]

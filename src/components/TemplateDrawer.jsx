@@ -4,10 +4,14 @@ import { TEMPLATES, getTemplate } from '../lib/templates'
 
 const CATEGORIES = {
   General: ['Blank'],
+  Career: ['Job Application Optimizer', 'Technical Portfolio Piece', 'Interview Prep Guide'],
+  Business: ['Marketing Campaign', 'Data Analysis Report', 'Consulting Proposal', 'Meeting Prep'],
+  Engineering: ['DevOps CI/CD Pipeline', 'Code Review Checklist', 'Technical Documentation', 'Code Review Request'],
   Security: ['Cybersecurity Incident Response'],
-  Business: ['Marketing Campaign', 'Product Requirements', 'Data Analysis Report'],
-  Engineering: ['DevOps CI/CD Pipeline', 'Code Review Checklist', 'Technical Documentation'],
-  AI: ['AI Agent Prompt', 'Customer Support Bot'],
+  Product: ['Product Requirements'],
+  AI: ['AI Agent Prompt', 'Customer Support Bot', 'System Prompt Builder'],
+  Creative: ['Music Production Brief'],
+  Marketing: ['LinkedIn Post Builder'],
 }
 
 export function TemplateDrawer({ isOpen, onClose, onLoadTemplate, onImport }) {
