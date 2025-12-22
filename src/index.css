@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Animations */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+/* Button hover effects */
+.btn-primary {
+  @apply bg-gradient-to-r from-teal-500 to-teal-600 text-white font-medium
+         rounded-lg px-4 py-2 min-h-[44px] transition-all duration-200
+         hover:from-teal-400 hover:to-teal-500 hover:shadow-lg hover:shadow-teal-500/25
+         active:scale-[0.98];
+}
+
+.btn-secondary {
+  @apply bg-slate-800 border border-slate-700 text-slate-300 font-medium
+         rounded-lg px-4 py-2 min-h-[44px] transition-all duration-200
+         hover:border-teal-500/50 hover:text-white
+         active:scale-[0.98];
+}
+
+.btn-orange {
+  @apply bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium
+         rounded-lg px-4 py-2 min-h-[44px] transition-all duration-200
+         hover:from-orange-400 hover:to-orange-500 hover:shadow-lg hover:shadow-orange-500/25
+         active:scale-[0.98];
+}
+
+/* Card styles */
+.card {
+  @apply bg-slate-800 border border-slate-700 rounded-xl p-4 transition-all duration-200
+         hover:border-slate-600;
+}
+
+.card-interactive {
+  @apply card cursor-pointer hover:border-teal-500/50 hover:shadow-lg hover:shadow-teal-500/10;
+}
+
+/* Input styles */
+.input {
+  @apply bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white
+         placeholder-slate-500 min-h-[44px] w-full transition-all duration-200
+         focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20;
+}
+
+.textarea {
+  @apply input min-h-[100px] resize-none;
+}
+
+/* Tab styles */
+.tab {
+  @apply px-4 py-2 min-h-[44px] rounded-lg font-medium transition-all duration-200
+         text-slate-400 hover:text-white hover:bg-slate-800;
+}
+
+.tab-active {
+  @apply bg-teal-500 text-white hover:bg-teal-500;
+}
