@@ -38,27 +38,42 @@ export function Onboarding({ onCreate, onLoadTemplate }) {
         </div>
 
         {/* Feature Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-          <Card className="text-center">
-            <div className="text-3xl mb-3">🌳</div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <Card className="text-center group">
+            <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-teal-500/10 flex items-center justify-center">
+              <span className="text-2xl">🌳</span>
+            </div>
             <h3 className="font-semibold text-white mb-2">Hierarchical Structure</h3>
-            <p className="text-sm text-slate-400">
+            <p className="text-sm text-slate-400 mb-4">
               Build complex prompt trees with unlimited nesting
             </p>
+            <span className="text-teal-400 text-sm font-medium group-hover:text-teal-300 transition-colors">
+              Start Building &rarr;
+            </span>
           </Card>
-          <Card className="text-center">
-            <div className="text-3xl mb-3">📋</div>
+          <Card className="text-center group">
+            <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-teal-500/10 flex items-center justify-center">
+              <span className="text-2xl">📋</span>
+            </div>
             <h3 className="font-semibold text-white mb-2">Templates</h3>
-            <p className="text-sm text-slate-400">
+            <p className="text-sm text-slate-400 mb-4">
               Start from battle-tested templates for common use cases
             </p>
+            <span className="text-teal-400 text-sm font-medium group-hover:text-teal-300 transition-colors">
+              Browse Templates &rarr;
+            </span>
           </Card>
-          <Card className="text-center">
-            <div className="text-3xl mb-3">📤</div>
+          <Card className="text-center group">
+            <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-teal-500/10 flex items-center justify-center">
+              <span className="text-2xl">📤</span>
+            </div>
             <h3 className="font-semibold text-white mb-2">Export Anywhere</h3>
-            <p className="text-sm text-slate-400">
+            <p className="text-sm text-slate-400 mb-4">
               Download as Markdown or JSON for any AI system
             </p>
+            <span className="text-teal-400 text-sm font-medium group-hover:text-teal-300 transition-colors">
+              Export Options &rarr;
+            </span>
           </Card>
         </div>
 
