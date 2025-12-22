@@ -5,6 +5,7 @@ import { treeToMarkdown, treeToJSON, downloadFile } from '../lib/export-utils'
 
 export function ExportPanel({ tree }) {
   const [format, setFormat] = useState('markdown')
+  const [copied, setCopied] = useState(false)
 
   if (!tree) return null
 
@@ -18,7 +19,8 @@ export function ExportPanel({ tree }) {
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(content)
-    alert('Copied to clipboard!')
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
   }
 
   return (
@@ -74,8 +76,8 @@ export function ExportPanel({ tree }) {
         <Button variant="orange" onClick={handleDownload} className="flex-1">
           ⬇️ Download {format === 'markdown' ? '.md' : '.json'}
         </Button>
-        <Button variant="secondary" onClick={handleCopy}>
-          📋 Copy
+        <Button variant={copied ? "primary" : "secondary"} onClick={handleCopy}>
+          {copied ? '✓ Copied!' : '📋 Copy'}
         </Button>
       </div>
     </div>

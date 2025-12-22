@@ -6,7 +6,7 @@ import { TreeVisualization } from './components/TreeVisualization'
 import { ExportPanel } from './components/ExportPanel'
 import { About } from './components/About'
 import { TemplateDrawer } from './components/TemplateDrawer'
-import { jsonToTree } from './lib/export-utils'
+import { jsonToTree, treeToMarkdown } from './lib/export-utils'
 
 const NAV_ITEMS = [
   { id: 'builder', label: 'Builder' },
@@ -18,6 +18,7 @@ const NAV_ITEMS = [
 function App() {
   const [activeTab, setActiveTab] = useState('builder')
   const [showTemplates, setShowTemplates] = useState(false)
+  const [copyFeedback, setCopyFeedback] = useState(false)
   const {
     tree,
     selectedNodeId,
@@ -43,6 +44,14 @@ function App() {
   const handleLoadTemplate = (template) => {
     loadTree(template)
     setShowTemplates(false)
+  }
+
+  const handleCopyPrompt = async () => {
+    if (!tree) return
+    const markdown = treeToMarkdown(tree)
+    await navigator.clipboard.writeText(markdown)
+    setCopyFeedback(true)
+    setTimeout(() => setCopyFeedback(false), 2000)
   }
 
   // Show onboarding if no tree
@@ -119,6 +128,26 @@ function App() {
 
           {/* Right Actions */}
           <div className="flex items-center gap-2">
+            <button
+              onClick={handleCopyPrompt}
+              className="px-4 py-2 bg-teal-500 hover:bg-teal-400 text-white rounded-lg transition-colors flex items-center gap-2 font-medium"
+            >
+              {copyFeedback ? (
+                <>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="hidden sm:inline">Copied!</span>
+                </>
+              ) : (
+                <>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                  </svg>
+                  <span className="hidden sm:inline">Copy Prompt</span>
+                </>
+              )}
+            </button>
             <button
               onClick={() => setShowTemplates(true)}
               className="px-4 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors flex items-center gap-2"
