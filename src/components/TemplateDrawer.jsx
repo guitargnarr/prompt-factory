@@ -5,9 +5,9 @@ import { TEMPLATES, getTemplate } from '../lib/templates'
 const CATEGORIES = {
   General: ['Blank'],
   Security: ['Cybersecurity Incident Response'],
-  Business: ['Marketing Campaign', 'Product Requirements'],
-  Engineering: ['DevOps CI/CD Pipeline', 'Code Review Checklist'],
-  AI: ['AI Agent Prompt'],
+  Business: ['Marketing Campaign', 'Product Requirements', 'Data Analysis Report'],
+  Engineering: ['DevOps CI/CD Pipeline', 'Code Review Checklist', 'Technical Documentation'],
+  AI: ['AI Agent Prompt', 'Customer Support Bot'],
 }
 
 export function TemplateDrawer({ isOpen, onClose, onLoadTemplate, onImport }) {

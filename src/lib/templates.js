@@ -35,10 +35,10 @@ function createNodeRecursive(node) {
 export const TEMPLATE_CATEGORIES = {
   General: ['Blank'],
   Security: ['Cybersecurity Incident Response'],
-  Business: ['Marketing Campaign'],
-  Engineering: ['DevOps CI/CD Pipeline', 'Code Review Checklist'],
+  Business: ['Marketing Campaign', 'Data Analysis Report'],
+  Engineering: ['DevOps CI/CD Pipeline', 'Code Review Checklist', 'Technical Documentation'],
   Product: ['Product Requirements'],
-  AI: ['AI Agent Prompt']
+  AI: ['AI Agent Prompt', 'Customer Support Bot']
 }
 
 export const TEMPLATES = {
@@ -328,6 +328,166 @@ export const TEMPLATES = {
           children: [
             { title: 'Efficiency', content: 'Is the algorithm efficient?' },
             { title: 'Resource Usage', content: 'Memory and CPU considerations' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Customer Support Bot': {
+    icon: '💬',
+    category: 'AI',
+    description: 'AI chatbot for customer service',
+    create: () => createTemplateTree(
+      'Customer Support Bot',
+      'System prompt for customer service AI assistant',
+      [
+        {
+          title: 'Identity',
+          content: 'You are a friendly and professional customer support representative for [Company Name]. Your goal is to help customers resolve issues quickly while maintaining a positive experience.',
+          children: [
+            { title: 'Personality', content: 'Warm, patient, empathetic, solution-oriented. Never defensive or dismissive.' },
+            { title: 'Voice', content: 'Professional but conversational. Use simple language, avoid jargon.' }
+          ]
+        },
+        {
+          title: 'Knowledge Base',
+          content: 'Information the bot should know',
+          children: [
+            { title: 'Products/Services', content: 'Core offerings, pricing, features, and limitations' },
+            { title: 'Common Issues', content: 'Frequent problems and their solutions' },
+            { title: 'Policies', content: 'Refund policy, shipping times, warranty information' }
+          ]
+        },
+        {
+          title: 'Response Guidelines',
+          content: 'How to handle different situations',
+          children: [
+            { title: 'Greetings', content: 'Acknowledge the customer, ask how you can help' },
+            { title: 'Problem Solving', content: 'Ask clarifying questions, provide step-by-step solutions' },
+            { title: 'Escalation', content: 'When to transfer to human agent: billing disputes, complex technical issues, angry customers' },
+            { title: 'Closing', content: 'Confirm resolution, ask if anything else is needed, thank the customer' }
+          ]
+        },
+        {
+          title: 'Constraints',
+          content: 'What the bot should NOT do',
+          children: [
+            { title: 'Never', content: 'Make promises you cannot keep, share internal information, argue with customers' },
+            { title: 'Always', content: 'Protect customer privacy, verify identity before account changes, log interactions' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Technical Documentation': {
+    icon: '📚',
+    category: 'Engineering',
+    description: 'README and documentation structure',
+    create: () => createTemplateTree(
+      'Technical Documentation',
+      'Comprehensive documentation template for software projects',
+      [
+        {
+          title: 'Overview',
+          content: 'What this project does and why it exists',
+          children: [
+            { title: 'Description', content: 'One paragraph explaining the project purpose and key benefits' },
+            { title: 'Features', content: 'Bullet list of main capabilities' },
+            { title: 'Demo', content: 'Link to live demo, screenshots, or GIF showing the project in action' }
+          ]
+        },
+        {
+          title: 'Getting Started',
+          content: 'How to install and run the project',
+          children: [
+            { title: 'Prerequisites', content: 'Required software, versions, and dependencies' },
+            { title: 'Installation', content: 'Step-by-step setup instructions with code blocks' },
+            { title: 'Quick Start', content: 'Minimal example to get something working immediately' }
+          ]
+        },
+        {
+          title: 'Usage',
+          content: 'How to use the project',
+          children: [
+            { title: 'Basic Usage', content: 'Common use cases with examples' },
+            { title: 'Configuration', content: 'Available options and environment variables' },
+            { title: 'API Reference', content: 'Function signatures, parameters, return values' }
+          ]
+        },
+        {
+          title: 'Development',
+          content: 'Information for contributors',
+          children: [
+            { title: 'Architecture', content: 'High-level system design and folder structure' },
+            { title: 'Contributing', content: 'How to submit issues and pull requests' },
+            { title: 'Testing', content: 'How to run tests and add new ones' }
+          ]
+        },
+        {
+          title: 'Additional Info',
+          content: 'Supporting information',
+          children: [
+            { title: 'Troubleshooting', content: 'Common problems and solutions' },
+            { title: 'License', content: 'License type and terms' },
+            { title: 'Credits', content: 'Acknowledgments and dependencies' }
+          ]
+        }
+      ]
+    )
+  },
+
+  'Data Analysis Report': {
+    icon: '📊',
+    category: 'Business',
+    description: 'Structure for data analysis findings',
+    create: () => createTemplateTree(
+      'Data Analysis Report',
+      'Framework for presenting data analysis and insights',
+      [
+        {
+          title: 'Executive Summary',
+          content: 'Key findings and recommendations in 2-3 paragraphs for stakeholders who won\'t read the full report',
+          children: [
+            { title: 'Key Findings', content: '3-5 most important discoveries from the analysis' },
+            { title: 'Recommendations', content: 'Actionable next steps based on the data' }
+          ]
+        },
+        {
+          title: 'Methodology',
+          content: 'How the analysis was conducted',
+          children: [
+            { title: 'Data Sources', content: 'Where the data came from, time period covered' },
+            { title: 'Analysis Methods', content: 'Statistical techniques, tools used, assumptions made' },
+            { title: 'Limitations', content: 'Data quality issues, gaps, caveats to consider' }
+          ]
+        },
+        {
+          title: 'Findings',
+          content: 'Detailed results of the analysis',
+          children: [
+            { title: 'Trend Analysis', content: 'How metrics have changed over time' },
+            { title: 'Segment Comparison', content: 'Differences between groups (regions, demographics, etc.)' },
+            { title: 'Correlations', content: 'Relationships between variables' },
+            { title: 'Anomalies', content: 'Unexpected patterns or outliers discovered' }
+          ]
+        },
+        {
+          title: 'Visualizations',
+          content: 'Charts and graphs supporting the findings',
+          children: [
+            { title: 'Chart Descriptions', content: 'What each visualization shows and why it matters' },
+            { title: 'Data Tables', content: 'Supporting numerical data' }
+          ]
+        },
+        {
+          title: 'Conclusions',
+          content: 'Synthesis and next steps',
+          children: [
+            { title: 'Summary', content: 'What the data tells us overall' },
+            { title: 'Action Items', content: 'Specific recommendations with owners and timelines' },
+            { title: 'Future Analysis', content: 'Questions raised that warrant further investigation' }
           ]
         }
       ]
