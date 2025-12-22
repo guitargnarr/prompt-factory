@@ -73,6 +73,17 @@ function formatDate(isoString) {
   })
 }
 
+// Estimate token count (rough approximation: ~4 chars per token for English text)
+export function estimateTokens(text) {
+  if (!text) return 0
+  // More accurate estimation: count words and punctuation
+  // GPT models use ~1.3 tokens per word on average
+  const words = text.trim().split(/\s+/).length
+  const chars = text.length
+  // Blend word-based and char-based estimates
+  return Math.ceil((words * 1.3 + chars / 4) / 2)
+}
+
 // Download helper
 export function downloadFile(content, filename, type = 'text/plain') {
   const blob = new Blob([content], { type })

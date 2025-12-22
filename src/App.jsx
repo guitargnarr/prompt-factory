@@ -6,7 +6,7 @@ import { TreeVisualization } from './components/TreeVisualization'
 import { ExportPanel } from './components/ExportPanel'
 import { About } from './components/About'
 import { TemplateDrawer } from './components/TemplateDrawer'
-import { jsonToTree, treeToMarkdown } from './lib/export-utils'
+import { jsonToTree, treeToMarkdown, estimateTokens } from './lib/export-utils'
 
 const NAV_ITEMS = [
   { id: 'builder', label: 'Builder' },
@@ -105,7 +105,12 @@ function App() {
             <span className="text-2xl">🏭</span>
             <span className="font-bold text-white">Prompt Factory</span>
             {tree && (
-              <span className="text-slate-500 text-sm ml-2">/ {tree.title}</span>
+              <>
+                <span className="text-slate-500 text-sm ml-2">/ {tree.title}</span>
+                <span className="text-xs px-2 py-1 bg-slate-800 rounded text-slate-400 ml-2" title="Estimated token count">
+                  ~{estimateTokens(treeToMarkdown(tree)).toLocaleString()} tokens
+                </span>
+              </>
             )}
           </div>
 
