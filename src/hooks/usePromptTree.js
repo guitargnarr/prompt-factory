@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { createTree, addNode, deleteNode, updateNode, createNode } from '../lib/tree-utils'
+import { createTree, addNode, deleteNode, updateNode, createNode, moveNode, reorderChildren, findParent } from '../lib/tree-utils'
 
 const STORAGE_KEY = 'prompt-factory-tree'
 
@@ -84,6 +84,30 @@ export function usePromptTree() {
     localStorage.removeItem(STORAGE_KEY)
   }, [])
 
+  // Move a node to a new parent
+  const move = useCallback((nodeId, newParentId, newIndex = -1) => {
+    if (!tree) return
+    setTree(prev => {
+      const updated = moveNode({ ...prev, root_node: JSON.parse(JSON.stringify(prev.root_node)) }, nodeId, newParentId, newIndex)
+      return { ...updated }
+    })
+  }, [tree])
+
+  // Reorder children within the same parent
+  const reorder = useCallback((parentId, oldIndex, newIndex) => {
+    if (!tree) return
+    setTree(prev => {
+      const updated = reorderChildren({ ...prev, root_node: JSON.parse(JSON.stringify(prev.root_node)) }, parentId, oldIndex, newIndex)
+      return { ...updated }
+    })
+  }, [tree])
+
+  // Get parent of a node
+  const getParent = useCallback((nodeId) => {
+    if (!tree) return null
+    return findParent(tree.root_node, nodeId)
+  }, [tree])
+
   return {
     tree,
     selectedNodeId,
@@ -94,6 +118,9 @@ export function usePromptTree() {
     remove,
     update,
     updateMetadata,
-    clear
+    clear,
+    move,
+    reorder,
+    getParent
   }
 }

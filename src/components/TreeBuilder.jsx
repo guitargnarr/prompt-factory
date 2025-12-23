@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Card } from './ui/Card'
 import { Input, Textarea } from './ui/Input'
 import { Button } from './ui/Button'
-import { TreeView } from './TreeView'
+import { DraggableTreeView } from './DraggableTreeView'
 import { NodeForm, EditNodeForm } from './NodeForm'
 import { findNode } from '../lib/tree-utils'
 
@@ -14,7 +14,10 @@ export function TreeBuilder({
   onUpdate,
   onDelete,
   onUpdateMetadata,
-  onClear
+  onClear,
+  onMove,
+  onReorder,
+  getParent
 }) {
   const [showSettings, setShowSettings] = useState(false)
   const [editTitle, setEditTitle] = useState(tree?.title || '')
@@ -85,11 +88,17 @@ export function TreeBuilder({
 
         {/* Tree View */}
         <Card>
-          <h3 className="font-semibold text-white mb-3">Tree Structure</h3>
-          <TreeView
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="font-semibold text-white">Tree Structure</h3>
+            <span className="text-xs text-slate-500">Drag to reorder</span>
+          </div>
+          <DraggableTreeView
             tree={tree}
             selectedNodeId={selectedNodeId}
             onSelectNode={onSelectNode}
+            onMove={onMove}
+            onReorder={onReorder}
+            getParent={getParent}
           />
         </Card>
 

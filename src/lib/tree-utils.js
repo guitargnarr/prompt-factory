@@ -129,6 +129,61 @@ export function getAllNodes(node, level = 0) {
   return nodes
 }
 
+// Move a node to a new parent or reorder within same parent
+export function moveNode(tree, nodeId, newParentId, newIndex = -1) {
+  // Can't move root
+  if (tree.root_node.id === nodeId) return tree
+
+  // Find the node to move
+  const nodeToMove = findNode(tree.root_node, nodeId)
+  if (!nodeToMove) return tree
+
+  // Find current parent and remove node from it
+  const currentParent = findParent(tree.root_node, nodeId)
+  if (!currentParent) return tree
+
+  // Remove from current parent
+  const nodeIndex = currentParent.children.findIndex(c => c.id === nodeId)
+  if (nodeIndex === -1) return tree
+  currentParent.children.splice(nodeIndex, 1)
+
+  // Find new parent
+  const newParent = findNode(tree.root_node, newParentId)
+  if (!newParent) {
+    // Restore if new parent not found
+    currentParent.children.splice(nodeIndex, 0, nodeToMove)
+    return tree
+  }
+
+  // Prevent moving a node into its own descendants
+  if (findNode(nodeToMove, newParentId)) {
+    currentParent.children.splice(nodeIndex, 0, nodeToMove)
+    return tree
+  }
+
+  // Add to new parent at specified index
+  if (newIndex === -1 || newIndex >= newParent.children.length) {
+    newParent.children.push(nodeToMove)
+  } else {
+    newParent.children.splice(newIndex, 0, nodeToMove)
+  }
+
+  tree.metadata.updated_at = new Date().toISOString()
+  return tree
+}
+
+// Reorder children within the same parent
+export function reorderChildren(tree, parentId, oldIndex, newIndex) {
+  const parent = findNode(tree.root_node, parentId)
+  if (!parent || !parent.children[oldIndex]) return tree
+
+  const [movedChild] = parent.children.splice(oldIndex, 1)
+  parent.children.splice(newIndex, 0, movedChild)
+
+  tree.metadata.updated_at = new Date().toISOString()
+  return tree
+}
+
 // Generate ASCII tree
 export function generateAsciiTree(node, prefix = '', isLast = true, isRoot = true) {
   let result = ''

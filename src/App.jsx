@@ -29,7 +29,10 @@ function App() {
     remove,
     update,
     updateMetadata,
-    clear
+    clear,
+    move,
+    reorder,
+    getParent
   } = usePromptTree()
 
   const handleImport = (jsonString) => {
@@ -188,6 +191,9 @@ function App() {
                 onDelete={remove}
                 onUpdateMetadata={updateMetadata}
                 onClear={clear}
+                onMove={move}
+                onReorder={reorder}
+                getParent={getParent}
               />
             )}
 
