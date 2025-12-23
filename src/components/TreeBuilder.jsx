@@ -1,10 +1,11 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { Card } from './ui/Card'
 import { Input, Textarea } from './ui/Input'
 import { Button } from './ui/Button'
 import { DraggableTreeView } from './DraggableTreeView'
 import { NodeForm, EditNodeForm } from './NodeForm'
 import { VersionHistory } from './VersionHistory'
+import { TreeSearch } from './TreeSearch'
 import { findNode } from '../lib/tree-utils'
 
 export function TreeBuilder({
@@ -30,8 +31,22 @@ export function TreeBuilder({
   const [editTitle, setEditTitle] = useState(tree?.title || '')
   const [focusEditForm, setFocusEditForm] = useState(false)
   const [addChildParentId, setAddChildParentId] = useState(null)
+  const [showSearch, setShowSearch] = useState(false)
+  const [highlightedNodeIds, setHighlightedNodeIds] = useState([])
   const editFormRef = useRef(null)
   const addFormRef = useRef(null)
+
+  // Keyboard shortcut for search (Cmd/Ctrl+F)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'f') {
+        e.preventDefault()
+        setShowSearch(true)
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   // Focus edit form when requested via keyboard
   useEffect(() => {
@@ -130,7 +145,20 @@ export function TreeBuilder({
         <Card>
           <div className="flex items-center justify-between mb-3">
             <h3 className="font-semibold text-white">Tree Structure</h3>
-            <span className="text-xs text-slate-500">Drag or use keyboard</span>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setShowSearch(true)}
+                className="flex items-center gap-1.5 px-2 py-1 text-xs text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+                title="Search tree (Cmd/Ctrl+F)"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <span className="hidden sm:inline">Search</span>
+                <kbd className="hidden sm:inline text-[10px] px-1 py-0.5 bg-slate-700 rounded">⌘F</kbd>
+              </button>
+              <span className="text-xs text-slate-500">Drag or use keyboard</span>
+            </div>
           </div>
           <DraggableTreeView
             tree={tree}
@@ -142,6 +170,7 @@ export function TreeBuilder({
             onDelete={onDelete}
             onRequestEdit={handleRequestEdit}
             onRequestAddChild={handleRequestAddChild}
+            highlightedNodeIds={highlightedNodeIds}
           />
         </Card>
 
@@ -201,6 +230,21 @@ export function TreeBuilder({
           </Card>
         )}
       </div>
+
+      {/* Search Modal */}
+      <TreeSearch
+        tree={tree}
+        isOpen={showSearch}
+        onClose={() => {
+          setShowSearch(false)
+          setHighlightedNodeIds([])
+        }}
+        onSelectNode={(nodeId) => {
+          onSelectNode(nodeId)
+          setHighlightedNodeIds([])
+        }}
+        onHighlightNodes={setHighlightedNodeIds}
+      />
     </div>
   )
 }

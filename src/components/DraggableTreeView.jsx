@@ -32,7 +32,8 @@ function SwipeableTreeNode({
   onSwipeLeft,
   onSwipeRight,
   onSwipeDelete,
-  isRoot
+  isRoot,
+  isHighlighted
 }) {
   const {
     attributes,
@@ -190,7 +191,9 @@ function SwipeableTreeNode({
           cursor-grab active:cursor-grabbing outline-none touch-pan-y
           ${isSelected
             ? 'bg-teal-500/20 border border-teal-500/50 text-white ring-2 ring-teal-400 ring-offset-1 ring-offset-slate-900'
-            : 'hover:bg-slate-700/50 text-slate-300 hover:text-white border border-transparent'
+            : isHighlighted
+              ? 'bg-orange-500/20 border border-orange-500/50 text-white'
+              : 'hover:bg-slate-700/50 text-slate-300 hover:text-white border border-transparent'
           }
           ${isThisDragging ? 'shadow-lg shadow-teal-500/20' : ''}
           ${swipeState.swiping ? 'transition-none' : 'transition-transform'}
@@ -335,7 +338,8 @@ export function DraggableTreeView({
   getParent,
   onDelete,
   onRequestEdit,
-  onRequestAddChild
+  onRequestAddChild,
+  highlightedNodeIds = []
 }) {
   const [activeId, setActiveId] = useState(null)
   const [expandedNodes, setExpandedNodes] = useState(new Set())
@@ -646,6 +650,7 @@ export function DraggableTreeView({
                 onSwipeRight={() => handleSwipeRight(node.id)}
                 onSwipeDelete={() => handleSwipeDelete(node.id)}
                 isRoot={node.id === tree.root_node.id}
+                isHighlighted={highlightedNodeIds.includes(node.id)}
               />
             ))}
           </div>
