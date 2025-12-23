@@ -4,6 +4,7 @@ import { Input, Textarea } from './ui/Input'
 import { Button } from './ui/Button'
 import { DraggableTreeView } from './DraggableTreeView'
 import { NodeForm, EditNodeForm } from './NodeForm'
+import { VersionHistory } from './VersionHistory'
 import { findNode } from '../lib/tree-utils'
 
 export function TreeBuilder({
@@ -17,7 +18,13 @@ export function TreeBuilder({
   onClear,
   onMove,
   onReorder,
-  getParent
+  getParent,
+  // Version control props
+  versions,
+  onSaveVersion,
+  onRestoreVersion,
+  onDeleteVersion,
+  onRenameVersion
 }) {
   const [showSettings, setShowSettings] = useState(false)
   const [editTitle, setEditTitle] = useState(tree?.title || '')
@@ -177,6 +184,20 @@ export function TreeBuilder({
                 onDelete={onDelete}
               />
             </div>
+          </Card>
+        )}
+
+        {/* Version History */}
+        {versions && (
+          <Card>
+            <VersionHistory
+              versions={versions}
+              onSaveVersion={onSaveVersion}
+              onRestoreVersion={onRestoreVersion}
+              onDeleteVersion={onDeleteVersion}
+              onRenameVersion={onRenameVersion}
+              currentTree={tree}
+            />
           </Card>
         )}
       </div>

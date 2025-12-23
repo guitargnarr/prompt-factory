@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { usePromptTree } from './hooks/usePromptTree'
+import { useVersionControl } from './hooks/useVersionControl'
 import { Onboarding } from './components/Onboarding'
 import { TreeBuilder } from './components/TreeBuilder'
 import { TreeVisualization } from './components/TreeVisualization'
@@ -34,6 +35,43 @@ function App() {
     reorder,
     getParent
   } = usePromptTree()
+
+  // Version control
+  const {
+    versions,
+    saveVersion,
+    autoSaveVersion,
+    getVersion,
+    deleteVersion,
+    renameVersion,
+    setRestoring
+  } = useVersionControl(tree)
+
+  // Auto-save version every 2 minutes if there are changes
+  const lastAutoSave = useRef(Date.now())
+  useEffect(() => {
+    if (!tree) return
+
+    const interval = setInterval(() => {
+      const now = Date.now()
+      if (now - lastAutoSave.current >= 120000) { // 2 minutes
+        autoSaveVersion()
+        lastAutoSave.current = now
+      }
+    }, 30000) // Check every 30 seconds
+
+    return () => clearInterval(interval)
+  }, [tree, autoSaveVersion])
+
+  // Handle version restore
+  const handleRestoreVersion = (versionId) => {
+    const version = getVersion(versionId)
+    if (version) {
+      setRestoring(true)
+      loadTree(version.treeSnapshot)
+      setTimeout(() => setRestoring(false), 100)
+    }
+  }
 
   const handleImport = (jsonString) => {
     const result = jsonToTree(jsonString)
@@ -194,6 +232,12 @@ function App() {
                 onMove={move}
                 onReorder={reorder}
                 getParent={getParent}
+                // Version control
+                versions={versions}
+                onSaveVersion={saveVersion}
+                onRestoreVersion={handleRestoreVersion}
+                onDeleteVersion={deleteVersion}
+                onRenameVersion={renameVersion}
               />
             )}
 
