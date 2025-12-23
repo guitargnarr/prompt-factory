@@ -3,10 +3,15 @@ import { Button } from './ui/Button'
 import { Input, Textarea, Select } from './ui/Input'
 import { getAllNodes } from '../lib/tree-utils'
 
-export function NodeForm({ tree, onAdd }) {
-  const [parentId, setParentId] = useState(tree?.root_node?.id || '')
+export function NodeForm({ tree, onAdd, defaultParentId, onAdded }) {
+  const [parentId, setParentId] = useState(defaultParentId || tree?.root_node?.id || '')
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
+
+  // Update parentId when defaultParentId changes (keyboard shortcut)
+  if (defaultParentId && defaultParentId !== parentId) {
+    setParentId(defaultParentId)
+  }
 
   if (!tree) return null
 
@@ -23,6 +28,7 @@ export function NodeForm({ tree, onAdd }) {
     onAdd(parentId, title, content)
     setTitle('')
     setContent('')
+    if (onAdded) onAdded()
   }
 
   return (

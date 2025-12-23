@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Card } from './ui/Card'
 import { Input, Textarea } from './ui/Input'
 import { Button } from './ui/Button'
@@ -21,6 +21,39 @@ export function TreeBuilder({
 }) {
   const [showSettings, setShowSettings] = useState(false)
   const [editTitle, setEditTitle] = useState(tree?.title || '')
+  const [focusEditForm, setFocusEditForm] = useState(false)
+  const [addChildParentId, setAddChildParentId] = useState(null)
+  const editFormRef = useRef(null)
+  const addFormRef = useRef(null)
+
+  // Focus edit form when requested via keyboard
+  useEffect(() => {
+    if (focusEditForm && editFormRef.current) {
+      const input = editFormRef.current.querySelector('input')
+      if (input) input.focus()
+      setFocusEditForm(false)
+    }
+  }, [focusEditForm])
+
+  // Focus add form when requested via keyboard
+  useEffect(() => {
+    if (addChildParentId && addFormRef.current) {
+      const input = addFormRef.current.querySelector('input')
+      if (input) input.focus()
+    }
+  }, [addChildParentId])
+
+  // Handle keyboard request to edit
+  const handleRequestEdit = (nodeId) => {
+    onSelectNode(nodeId)
+    setFocusEditForm(true)
+  }
+
+  // Handle keyboard request to add child
+  const handleRequestAddChild = (parentId) => {
+    setAddChildParentId(parentId)
+  }
+
   const [editDescription, setEditDescription] = useState(tree?.description || '')
 
   if (!tree) return null
@@ -90,7 +123,7 @@ export function TreeBuilder({
         <Card>
           <div className="flex items-center justify-between mb-3">
             <h3 className="font-semibold text-white">Tree Structure</h3>
-            <span className="text-xs text-slate-500">Drag to reorder</span>
+            <span className="text-xs text-slate-500">Drag or use keyboard</span>
           </div>
           <DraggableTreeView
             tree={tree}
@@ -99,6 +132,9 @@ export function TreeBuilder({
             onMove={onMove}
             onReorder={onReorder}
             getParent={getParent}
+            onDelete={onDelete}
+            onRequestEdit={handleRequestEdit}
+            onRequestAddChild={handleRequestAddChild}
           />
         </Card>
 
@@ -120,18 +156,27 @@ export function TreeBuilder({
       <div className="space-y-4">
         {/* Add Node Form */}
         <Card>
-          <NodeForm tree={tree} onAdd={onAdd} />
+          <div ref={addFormRef}>
+            <NodeForm
+              tree={tree}
+              onAdd={onAdd}
+              defaultParentId={addChildParentId || selectedNodeId}
+              onAdded={() => setAddChildParentId(null)}
+            />
+          </div>
         </Card>
 
         {/* Edit Selected Node */}
         {selectedNode && (
           <Card>
-            <EditNodeForm
-              key={selectedNodeId}
-              node={selectedNode}
-              onUpdate={onUpdate}
-              onDelete={onDelete}
-            />
+            <div ref={editFormRef}>
+              <EditNodeForm
+                key={selectedNodeId}
+                node={selectedNode}
+                onUpdate={onUpdate}
+                onDelete={onDelete}
+              />
+            </div>
           </Card>
         )}
       </div>
